@@ -378,7 +378,7 @@
   <div class="card-scene" id="card-scene" onclick="flipCard()">
     <div class="card-inner" id="card-inner">
       <div class="card-face card-front" style="padding:0; overflow:hidden;">
-        <img id="card-front-img" src="Card/Back Card Design.png" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:var(--radius-card);" onerror="this.style.display='none'; document.getElementById('front-fallback').style.display='flex'">
+        <img id="card-front-img" src="./Card/Back%20Card%20Design.png" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:var(--radius-card);" onerror="this.style.display='none'; document.getElementById('front-fallback').style.display='flex'">
         <div id="front-fallback" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; position:absolute; top:0; left:0; z-index:-1;">
           <div class="card-front-icon">👁️</div>
           <div class="card-front-text" data-i18n="card_tap">Tap to Reveal</div>
@@ -743,7 +743,7 @@ function renderDistribution(){
   document.getElementById('back-fallback').style.display = 'none';
   
   const rkCapitalized = rk.charAt(0).toUpperCase() + rk.slice(1);
-  backImg.src = `Card/${rkCapitalized}.png`;
+  backImg.src = `./Card/${rkCapitalized}.png`;
 
   const ci=document.getElementById('card-inner');
   ci.style.transition='none';ci.classList.remove('flipped');
