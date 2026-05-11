@@ -20,7 +20,15 @@
       min-height:100vh;display:flex;flex-direction:column;align-items:center;
       justify-content:center;padding:24px 16px 68px;-webkit-font-smoothing:antialiased;
       transition:background .6s}
-    body.night-mode{background:var(--night-bg)}
+    body.night-mode{
+      --bg: var(--night-bg);
+      --card-bg: var(--night-card);
+      --text-primary: var(--night-text);
+      --text-secondary: var(--night-sub);
+      --border: var(--night-border);
+      --btn-bg: #3a3a3c;
+      --btn-hover: #48484a;
+    }
 
     /* ── SPLASH ── */
     #splash{position:fixed;inset:0;z-index:1000;background:#fff;
@@ -147,94 +155,44 @@
     .btn-next:hover{background:var(--btn-hover)}
     .btn-next:active{transform:scale(.98)}
 
-    /* ── ROLES ASSIGNED (bridge screen) ── */
-    .bridge-emoji{font-size:56px;margin-bottom:16px;line-height:1}
-    .bridge-title{font-size:24px;font-weight:700;letter-spacing:-.4px;margin-bottom:8px;text-align:center}
-    .bridge-sub{font-size:14px;color:var(--text-secondary);margin-bottom:32px;text-align:center;line-height:1.6}
-    .btn-night{width:100%;max-width:280px;padding:16px;background:var(--night-bg);color:#fff;border:none;
-      border-radius:var(--radius-btn);font-family:var(--font);font-size:16px;font-weight:600;
-      cursor:pointer;box-shadow:var(--shadow-btn);transition:background .15s,transform .1s;
-      -webkit-tap-highlight-color:transparent;margin-bottom:12px}
-    .btn-night:hover{background:#000}
-    .btn-night:active{transform:scale(.98)}
-    .btn-ghost{width:100%;max-width:280px;padding:14px;background:transparent;
-      color:var(--text-secondary);border:1.5px solid var(--border);border-radius:var(--radius-btn);
-      font-family:var(--font);font-size:15px;font-weight:500;cursor:pointer;
-      transition:border-color .15s,color .15s,transform .1s;-webkit-tap-highlight-color:transparent}
-    .btn-ghost:hover{border-color:#8e8e93;color:var(--text-primary)}
-    .btn-ghost:active{transform:scale(.98)}
-
-    @keyframes slideUp{from{opacity:1;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
-
-    /* ── NIGHT TIMER ── */
-    #screen-timer{
-      background:var(--night-bg);
-      position:fixed;inset:0;z-index:200;
-      max-width:none;padding:48px 24px 80px;
-      animation:slideUp .45s cubic-bezier(.22,1,.36,1) both;
-    }
-    #screen-timer.active{display:flex}
-    #screen-timer .screen-inner{display:flex;flex-direction:column;align-items:center;width:100%;max-width:340px}
-
-    .timer-phase-badge{
-      display:inline-flex;align-items:center;gap:7px;
-      background:#3a3a3c;border-radius:50px;padding:7px 18px 7px 10px;
-      margin-bottom:36px;
-    }
-    .timer-phase-dot{width:8px;height:8px;border-radius:50%;background:#f5f5f7;
-      animation:pulseDot 1.8s ease-in-out infinite}
-    @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-    .timer-phase-dot.paused{animation:none;opacity:.3}
-    .timer-phase-text{font-size:14px;font-weight:600;color:#f5f5f7;letter-spacing:.1px}
-
-    /* Circular ring */
-    .timer-ring-wrap{position:relative;width:220px;height:220px;margin-bottom:32px}
-    .timer-ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
-    .timer-ring-bg{fill:none;stroke:#3a3a3c;stroke-width:10}
-    .timer-ring-fg{fill:none;stroke:#f5f5f7;stroke-width:10;stroke-linecap:round;
-      transition:stroke-dashoffset .95s linear, stroke .4s}
-    .timer-ring-fg.urgent{stroke:#ff453a}
-    .timer-center{position:absolute;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:2px}
-    .timer-digits{font-size:62px;font-weight:700;letter-spacing:-.5px;
-      color:#f5f5f7;line-height:1;font-variant-numeric:tabular-nums;
-      transition:color .3s}
-    .timer-digits.urgent{color:#ff453a}
-    .timer-digits.finished{color:#30d158}
-    .timer-label-small{font-size:12px;color:#8e8e93;font-weight:500;letter-spacing:.3px;
-      text-transform:uppercase}
-
-    /* Timer hint */
-    .timer-hint{font-size:13px;color:#8e8e93;margin-bottom:32px;text-align:center;line-height:1.5}
-
-    /* Timer buttons row */
-    .timer-btn-row{display:flex;gap:12px;width:100%}
-    .btn-skip{flex:1;padding:15px;background:#3a3a3c;color:#f5f5f7;border:none;
+    /* ── DASHBOARD ── */
+    #screen-dashboard{width:100%;max-width:600px;}
+    .dash-header{margin-bottom:24px;text-align:center;}
+    .dash-title{font-size:24px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px;}
+    
+    .dash-timer-card{background:var(--card-bg);border-radius:var(--radius-card);
+      box-shadow:var(--shadow-card);padding:24px;margin-bottom:24px;display:flex;
+      flex-direction:column;align-items:center;width:100%;}
+    .dash-timer-display{font-size:64px;font-weight:700;letter-spacing:-1px;line-height:1;
+      margin-bottom:16px;font-variant-numeric:tabular-nums;color:var(--text-primary);
+      transition:color .3s;}
+    .dash-timer-display.urgent{color:#ff453a;}
+    .dash-timer-controls{display:flex;gap:12px;width:100%;justify-content:center;}
+    .dash-btn{padding:14px 20px;background:var(--btn-bg);color:#fff;border:none;
       border-radius:var(--radius-btn);font-family:var(--font);font-size:15px;font-weight:600;
-      cursor:pointer;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent}
-    .btn-skip:hover{background:#48484a}
-    .btn-skip:active{transform:scale(.98)}
-    .btn-pause{width:52px;height:52px;background:#3a3a3c;color:#f5f5f7;border:none;
-      border-radius:14px;font-size:18px;cursor:pointer;display:flex;align-items:center;
-      justify-content:center;transition:background .15s,transform .1s;
-      -webkit-tap-highlight-color:transparent;flex-shrink:0}
-    .btn-pause:hover{background:#48484a}
-    .btn-pause:active{transform:scale(.95)}
+      cursor:pointer;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent;
+      flex:1;max-width:120px;}
+    .dash-btn:hover{background:var(--btn-hover);}
+    .dash-btn:active{transform:scale(.95);}
+    .dash-btn.secondary{background:#e5e5ea;color:var(--text-primary);}
+    .dash-btn.secondary:hover{background:#d1d1d6;}
 
-    /* Timer done state */
-    .timer-done-msg{font-size:18px;font-weight:600;color:#30d158;
-      margin-bottom:8px;text-align:center;animation:fadeUp .3s ease both}
+    .dash-content-wrapper { width: 100%; display: flex; flex-direction: column; }
+    .dash-timer-section { width: 100%; display: flex; flex-direction: column; align-items: center; }
 
-    /* ── DAY PHASE ── */
-    .day-round-badge{
-      font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
-      color:var(--text-muted);margin-bottom:20px
-    }
-    .day-emoji{font-size:54px;margin-bottom:14px;line-height:1}
-    .day-title{font-size:24px;font-weight:700;letter-spacing:-.4px;margin-bottom:8px;text-align:center}
-    .day-sub{font-size:14px;color:var(--text-secondary);margin-bottom:32px;text-align:center;line-height:1.6}
-
-    /* ── END ── */
+    .player-list{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+    .player-item{display:flex;align-items:center;justify-content:space-between;
+      background:var(--card-bg);padding:14px 20px;border-radius:16px;box-shadow:var(--shadow-card);
+      transition:opacity .3s, transform .3s;}
+    .player-item.dead{opacity:0.5;}
+    .player-info{display:flex;align-items:center;gap:12px;}
+    .player-emoji{font-size:24px;line-height:1;}
+    .player-details{display:flex;flex-direction:column;}
+    .player-name-dash{font-size:15px;font-weight:600;color:var(--text-primary);}
+    .player-role-dash{font-size:12px;color:var(--text-secondary);margin-top:2px;}
+    .btn-kill{padding:8px 14px;border-radius:10px;border:none;background:#ff453a20;
+      color:#ff453a;font-weight:600;font-size:13px;cursor:pointer;transition:background .15s;}
+    .player-item.dead .btn-kill{background:#30d15820;color:#30d158;}
     .end-emoji{font-size:58px;margin-bottom:16px;line-height:1}
     .end-title{font-size:26px;font-weight:700;letter-spacing:-.4px;margin-bottom:8px;text-align:center}
     .end-sub{font-size:15px;color:var(--text-secondary);margin-bottom:36px;text-align:center;line-height:1.6}
@@ -244,8 +202,9 @@
       color:var(--text-muted);pointer-events:none;transition:color .4s}
     body.night-mode footer{color:#48484a}
 
-    /* ── LANG ── */
+    /* ── LANG & THEME ── */
     .lang-switcher{position:fixed;bottom:12px;right:16px;z-index:100}
+    .theme-switcher{position:fixed;bottom:12px;left:16px;z-index:100}
     .lang-btn{display:flex;align-items:center;gap:6px;padding:6px 12px 6px 8px;
       background:var(--card-bg);border:1px solid var(--border);border-radius:50px;
       box-shadow:0 2px 12px rgba(0,0,0,.09),0 1px 3px rgba(0,0,0,.05);cursor:pointer;
@@ -256,6 +215,44 @@
     .lang-btn:hover{box-shadow:0 4px 20px rgba(0,0,0,.13);color:var(--text-primary)}
     .lang-btn:active{transform:scale(.95)}
     .lang-flag{font-size:16px;line-height:1}
+    /* ── RESPONSIVE DESIGN (PC & TABLET) ── */
+    @media (min-width: 768px) {
+      .screen { max-width: 800px; padding: 0 40px; }
+      
+      .cards-wrapper {
+        display: flex; gap: 24px; width: 100%; align-items: flex-start;
+        margin-bottom: 24px;
+      }
+      .quick-card { flex: 1; margin-bottom: 0; }
+      .setup-card { flex: 1.5; margin-bottom: 0; }
+      
+      .total-row { max-width: 400px; margin: 0 auto 20px; }
+      .btn-primary { max-width: 400px; margin: 0 auto; }
+      .error-msg { max-width: 400px; margin: 10px auto 0; }
+      
+      .card-scene { width: 320px; height: 460px; }
+      .card-front-icon { font-size: 60px; }
+      .card-role-emoji { font-size: 110px; }
+      .card-role-name { font-size: 24px; }
+      .card-role-desc { font-size: 14px; max-width: 240px; }
+      
+      .btn-next { width: 320px; padding: 18px; font-size: 18px; }
+      .btn-night, .btn-ghost { max-width: 320px; padding: 18px; font-size: 18px; }
+      
+      .timer-ring-wrap { width: 300px; height: 300px; }
+      .timer-ring-wrap svg { width: 100%; height: 100%; }
+      .timer-digits { font-size: 80px; }
+      
+      .day-emoji, .end-emoji, .bridge-emoji { font-size: 80px; }
+      .day-title, .end-title, .bridge-title { font-size: 32px; }
+      .day-sub, .end-sub, .bridge-sub { font-size: 18px; }
+
+      #screen-dashboard { max-width: 1040px; padding: 0 40px; }
+      .dash-content-wrapper { display: flex; flex-direction: row; gap: 40px; align-items: flex-start; width: 100%; }
+      .dash-timer-section { flex: 0 0 340px; position: sticky; top: 40px; display:flex; flex-direction:column; gap:16px; }
+      .dash-timer-card { margin-bottom: 0; }
+      .player-list { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 0; }
+    }
   </style>
 </head>
 <body>
@@ -274,11 +271,13 @@
   <h1 class="setup-title" data-i18n="title">Werewolf Village</h1>
   <p class="setup-subtitle" data-i18n="subtitle">Configure roles for your game</p>
 
+  <div class="cards-wrapper" style="width: 100%;">
+
   <div class="quick-card">
     <div class="quick-label" data-i18n="quick_label">QUICK SETUP</div>
     <div class="quick-row">
       <input class="player-count-input" id="player-count-input" type="number"
-        min="4" max="30" placeholder="–" oninput="onPlayerCountInput()"/>
+        min="4" max="999" placeholder="–" oninput="onPlayerCountInput()"/>
       <button class="btn-suggest" data-i18n="btn_suggest" onclick="autoSuggest()">Auto-Balance</button>
     </div>
     <p class="suggest-hint" id="suggest-hint"></p>
@@ -334,6 +333,31 @@
         <button class="counter-btn" onclick="changeCount('doctor',1)">+</button>
       </div>
     </div>
+    <div class="role-row">
+      <div class="role-label">
+        <div class="role-emoji-box">👑</div>
+        <div><div class="role-name" data-i18n="role_king">King</div>
+             <div class="role-desc" data-i18n="role_king_desc">Leader of the village</div></div>
+      </div>
+      <div class="counter">
+        <button class="counter-btn" onclick="changeCount('king',-1)">−</button>
+        <span class="counter-value" id="count-king">0</span>
+        <button class="counter-btn" onclick="changeCount('king',1)">+</button>
+      </div>
+    </div>
+    <div class="role-row">
+      <div class="role-label">
+        <div class="role-emoji-box">🤡</div>
+        <div><div class="role-name" data-i18n="role_joker">Joker</div>
+             <div class="role-desc" data-i18n="role_joker_desc">Wins if voted out</div></div>
+      </div>
+      <div class="counter">
+        <button class="counter-btn" onclick="changeCount('joker',-1)">−</button>
+        <span class="counter-value" id="count-joker">0</span>
+        <button class="counter-btn" onclick="changeCount('joker',1)">+</button>
+      </div>
+    </div>
+  </div>
   </div>
 
   <div class="total-row">
@@ -353,72 +377,55 @@
   </div>
   <div class="card-scene" id="card-scene" onclick="flipCard()">
     <div class="card-inner" id="card-inner">
-      <div class="card-face card-front">
-        <div class="card-front-icon">👁️</div>
-        <div class="card-front-text" data-i18n="card_tap">Tap to Reveal</div>
-        <div class="card-front-hint" data-i18n="card_hint">Your role is hidden</div>
+      <div class="card-face card-front" style="padding:0; overflow:hidden;">
+        <img id="card-front-img" src="Card/Back Card Design.png" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:var(--radius-card);" onerror="this.style.display='none'; document.getElementById('front-fallback').style.display='flex'">
+        <div id="front-fallback" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; position:absolute; top:0; left:0; z-index:-1;">
+          <div class="card-front-icon">👁️</div>
+          <div class="card-front-text" data-i18n="card_tap">Tap to Reveal</div>
+          <div class="card-front-hint" data-i18n="card_hint">Your role is hidden</div>
+        </div>
       </div>
-      <div class="card-face card-back">
-        <div class="card-role-emoji" id="card-emoji">🧑</div>
-        <div class="card-role-name"  id="card-role-name">Villager</div>
-        <div class="card-divider"></div>
-        <div class="card-role-desc"  id="card-role-desc"></div>
+      <div class="card-face card-back" style="padding:0; overflow:hidden;">
+        <img id="card-back-img" src="" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:var(--radius-card);" onerror="this.style.display='none'; document.getElementById('back-fallback').style.display='flex'">
+        <div id="back-fallback" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; position:absolute; top:0; left:0; z-index:-1;">
+          <div class="card-role-emoji" id="card-emoji">🧑</div>
+          <div class="card-role-name"  id="card-role-name">Villager</div>
+          <div class="card-divider"></div>
+          <div class="card-role-desc"  id="card-role-desc"></div>
+        </div>
       </div>
     </div>
+  </div>
+  <div id="revealed-role-info" style="opacity:0; visibility:hidden; text-align:center; margin-bottom:24px; transition: opacity 0.4s ease, visibility 0.4s; padding:0 20px; min-height:60px;">
+    <div id="revealed-role-name" style="font-size:22px; font-weight:700; margin-bottom:6px;">Villager</div>
+    <div id="revealed-role-desc" style="font-size:14px; color:var(--text-secondary); line-height:1.5;">Find and vote out all the werewolves.</div>
   </div>
   <button class="btn-next" id="btn-next" style="display:none" onclick="nextPlayer()">Next Player →</button>
 </section>
 
-<!-- ══ BRIDGE (roles assigned) ══ -->
-<section class="screen" id="screen-bridge">
-  <div class="bridge-emoji">🎴</div>
-  <h2 class="bridge-title" data-i18n="bridge_title">All Roles Assigned</h2>
-  <p  class="bridge-sub"   data-i18n="bridge_sub">Everyone knows their role.<br>Time to begin the game!</p>
-  <button class="btn-night" onclick="startNight()" id="btn-start-night">🌙 Start Night 1</button>
-  <button class="btn-ghost" data-i18n="btn_restart" onclick="restartGame()">Restart Game</button>
-</section>
+<!-- ══ DASHBOARD ══ -->
+<section class="screen" id="screen-dashboard">
+  <div class="dash-header">
+    <h2 class="dash-title" data-i18n="dash_title">Player Management</h2>
+  </div>
 
-<!-- ══ NIGHT TIMER ══ -->
-<section class="screen" id="screen-timer">
-  <div class="screen-inner">
-    <!-- Phase badge -->
-    <div class="timer-phase-badge">
-      <div class="timer-phase-dot" id="timer-dot"></div>
-      <span class="timer-phase-text" id="timer-phase-label">Night 1</span>
-    </div>
-
-    <!-- Ring -->
-    <div class="timer-ring-wrap">
-      <svg width="220" height="220" viewBox="0 0 220 220">
-        <circle class="timer-ring-bg" cx="110" cy="110" r="95"/>
-        <circle class="timer-ring-fg" id="timer-ring" cx="110" cy="110" r="95"
-          stroke-dasharray="596.9" stroke-dashoffset="0"/>
-      </svg>
-      <div class="timer-center">
-        <div class="timer-digits" id="timer-digits">2:00</div>
-        <div class="timer-label-small" data-i18n="timer_remaining">remaining</div>
+  <div class="dash-content-wrapper">
+    <div class="dash-timer-section">
+      <div class="dash-timer-card">
+        <div class="dash-timer-display" id="dash-timer-digits">1:00</div>
+        <div class="dash-timer-controls">
+          <button class="dash-btn secondary" onclick="resetDashTimer()">Reset</button>
+          <button class="dash-btn" onclick="toggleDashTimer()" id="dash-btn-play">▶ Start</button>
+          <button class="dash-btn secondary" onclick="addDashTime(30)">+30s</button>
+        </div>
       </div>
+      <button class="btn-primary" style="width:100%; max-width:340px; margin-bottom: 24px;" data-i18n="btn_end_game" onclick="endGame()">End Game</button>
     </div>
 
-    <!-- Hint -->
-    <p class="timer-hint" data-i18n="timer_hint">Werewolves, open your eyes.<br>Choose your victim quietly.</p>
-
-    <!-- Buttons -->
-    <div class="timer-btn-row">
-      <button class="btn-skip" id="btn-skip" onclick="skipTimer()" data-i18n="btn_skip">Skip →</button>
-      <button class="btn-pause" id="btn-pause" onclick="togglePause()" title="Pause">⏸</button>
+    <div class="player-list" id="player-list">
+      <!-- Populated dynamically -->
     </div>
   </div>
-</section>
-
-<!-- ══ DAY PHASE ══ -->
-<section class="screen" id="screen-day">
-  <div class="day-round-badge" id="day-round-label">ROUND 1</div>
-  <div class="day-emoji">☀️</div>
-  <h2 class="day-title" data-i18n="day_title">Day Phase</h2>
-  <p  class="day-sub"   data-i18n="day_sub">Everyone wake up!<br>Discuss and vote to eliminate a suspect.</p>
-  <button class="btn-night" onclick="startNight()" id="btn-next-night">🌙 Start Night 2</button>
-  <button class="btn-ghost" data-i18n="btn_end_game" onclick="endGame()">End Game</button>
 </section>
 
 <!-- ══ END ══ -->
@@ -436,23 +443,30 @@
     <span class="lang-label" id="lang-label">Indonesia</span>
   </button>
 </div>
+<div class="theme-switcher">
+  <button class="lang-btn" onclick="toggleTheme()" title="Toggle Dark Mode">
+    <span class="lang-flag" id="theme-icon">🌙</span>
+  </button>
+</div>
 
 <script>
 /* ══════════════════════════════════════
    TRANSLATIONS
 ══════════════════════════════════════ */
-const ROLE_EMOJIS={villager:'🧑',werewolf:'🐺',seer:'🔮',doctor:'🩺'};
+const ROLE_EMOJIS={villager:'🧑',werewolf:'🐺',seer:'🔮',doctor:'🩺',king:'👑',joker:'🤡'};
 const NIGHT_DURATION=120;
 const RING_CIRCUMFERENCE=596.9; // 2*PI*95
 
 const i18n={
   en:{
-    title:'Werewolf Village',subtitle:'Configure roles for your game',
+    title:'Werewolf Village',subtitle:'Configure roles for your game',dash_title:'Player Management',
     quick_label:'QUICK SETUP',btn_suggest:'Auto-Balance',manual_label:'MANUAL ROLES',
     role_villager:'Villager',role_villager_desc:'The townsfolk',
     role_werewolf:'Werewolf',role_werewolf_desc:'Eliminate the village',
     role_seer:'Seer',role_seer_desc:'Reveals true identities',
     role_doctor:'Doctor',role_doctor_desc:'Protects one each night',
+    role_king:'King',role_king_desc:'Has a human shield',
+    role_joker:'Joker',role_joker_desc:'Wins if voted out',
     total_players:'Total Players',btn_generate:'Generate Roles',
     error_min:'Add at least 4 players to start.',
     card_tap:'Tap to Reveal',card_hint:'Your role is hidden',
@@ -472,21 +486,25 @@ const i18n={
     btn_restart:'Restart Game',
     next_flag:'\uD83C\uDDEE\uD83C\uDDE9',next_label:'Indonesia',
     suggest_hint:(v,w,s,d)=>`${v} Villager · ${w} Werewolf · ${s} Seer · ${d} Doctor`,
-    role_names:{villager:'Villager',werewolf:'Werewolf',seer:'Seer',doctor:'Doctor'},
+    role_names:{villager:'Villager',werewolf:'Werewolf',seer:'Seer',doctor:'Doctor',king:'King',joker:'Joker'},
     role_card_desc:{
       villager:'Find and vote out all the werewolves.',
       werewolf:'Each night, secretly eliminate a villager.',
       seer:'Each night, peek at one player\'s true role.',
       doctor:'Each night, protect one player from death.',
+      king:'Choose one player as your shield. If you are attacked, they die instead.',
+      joker:'Try to get yourself voted out to win the game.',
     }
   },
   id:{
-    title:'Desa Manusia Serigala',subtitle:'Atur peran untuk permainanmu',
+    title:'Desa Manusia Serigala',subtitle:'Atur peran untuk permainanmu',dash_title:'Manajemen Pemain',
     quick_label:'ATUR CEPAT',btn_suggest:'Saran Otomatis',manual_label:'ATUR MANUAL',
-    role_villager:'Warga',role_villager_desc:'Penduduk desa biasa',
-    role_werewolf:'Manusia Serigala',role_werewolf_desc:'Habisi seluruh desa',
-    role_seer:'Peramal',role_seer_desc:'Mengungkap identitas asli',
-    role_doctor:'Dokter',role_doctor_desc:'Melindungi satu orang tiap malam',
+    role_villager:'Villager',role_villager_desc:'Penduduk desa biasa',
+    role_werewolf:'Werewolf',role_werewolf_desc:'Habisi seluruh desa',
+    role_seer:'Seer',role_seer_desc:'Mengungkap identitas asli',
+    role_doctor:'Doctor',role_doctor_desc:'Melindungi satu orang tiap malam',
+    role_king:'King',role_king_desc:'Memiliki tameng hidup',
+    role_joker:'Joker',role_joker_desc:'Menang jika divoting keluar',
     total_players:'Total Pemain',btn_generate:'Bagikan Peran',
     error_min:'Tambahkan minimal 4 pemain untuk mulai.',
     card_tap:'Ketuk untuk Membuka',card_hint:'Peranmu tersembunyi',
@@ -505,13 +523,15 @@ const i18n={
     end_title:'Permainan Selesai',end_sub:'Permainan yang seru!\nMau main lagi?',
     btn_restart:'Mulai Ulang',
     next_flag:'\uD83C\uDDEC\uD83C\uDDE7',next_label:'English',
-    suggest_hint:(v,w,s,d)=>`${v} Warga · ${w} Serigala · ${s} Peramal · ${d} Dokter`,
-    role_names:{villager:'Warga',werewolf:'Manusia Serigala',seer:'Peramal',doctor:'Dokter'},
+    suggest_hint:(v,w,s,d)=>`${v} Villager · ${w} Werewolf · ${s} Seer · ${d} Doctor`,
+    role_names:{villager:'Villager',werewolf:'Werewolf',seer:'Seer',doctor:'Doctor',king:'King',joker:'Joker'},
     role_card_desc:{
       villager:'Temukan dan singkirkan semua manusia serigala.',
       werewolf:'Tiap malam, eliminasi satu warga secara diam-diam.',
       seer:'Tiap malam, intip peran asli satu pemain.',
       doctor:'Tiap malam, lindungi satu pemain dari kematian.',
+      king:'Tunjuk satu pemain sebagai tamengmu. Jika kamu dibunuh, dia yang mati.',
+      joker:'Berusahalah agar divoting keluar untuk memenangkan permainan.',
     }
   }
 };
@@ -587,10 +607,18 @@ function playClick(){
    STATE
 ══════════════════════════════════════ */
 let lang='en';
-const counts={villager:4,werewolf:2,seer:1,doctor:1};
+const counts={villager:4,werewolf:2,seer:1,doctor:1,king:0,joker:0};
 let roles=[],currentPlayer=0,isFlipped=false;
 let nightRound=1;
 let timerLeft=NIGHT_DURATION,timerInterval=null,timerPaused=false,timerDone=false;
+
+let isDarkMode = false;
+function toggleTheme() {
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('night-mode', isDarkMode);
+  document.getElementById('theme-icon').textContent = isDarkMode ? '☀️' : '🌙';
+  playClick();
+}
 
 /* ══════════════════════════════════════
    LANGUAGE
@@ -615,6 +643,8 @@ function applyLang(){
     const rk=roles[currentPlayer];
     document.getElementById('card-role-name').textContent=t.role_names[rk];
     document.getElementById('card-role-desc').textContent=t.role_card_desc[rk];
+    document.getElementById('revealed-role-name').textContent=t.role_names[rk];
+    document.getElementById('revealed-role-desc').textContent=t.role_card_desc[rk];
     const btn=document.getElementById('btn-next');
     if(btn.style.display!=='none')
       btn.innerHTML=currentPlayer<roles.length-1?t.btn_next:t.btn_finish;
@@ -644,11 +674,11 @@ function onPlayerCountInput(){
 function autoSuggest(){
   const n=parseInt(document.getElementById('player-count-input').value,10);
   const t=i18n[lang];
-  if(!n||n<4||n>30){document.getElementById('setup-error').textContent=t.error_min;return}
+  if(!n||n<4||n>999){document.getElementById('setup-error').textContent=t.error_min;return}
   document.getElementById('setup-error').textContent='';
-  const w=Math.max(1,Math.round(n/4.5)),s=1,d=n>=6?1:0,v=n-w-s-d;
-  counts.villager=v;counts.werewolf=w;counts.seer=s;counts.doctor=d;
-  ['villager','werewolf','seer','doctor'].forEach(r=>
+  const w=Math.max(1,Math.round(n/4.5)),s=Math.max(1,Math.floor(n/15)||1),d=n>=6?Math.max(1,Math.floor(n/15)||1):0,v=n-w-s-d;
+  counts.villager=v;counts.werewolf=w;counts.seer=s;counts.doctor=d;counts.king=0;counts.joker=0;
+  ['villager','werewolf','seer','doctor','king','joker'].forEach(r=>
     document.getElementById('count-'+r).textContent=counts[r]);
   updateTotal();
   document.getElementById('suggest-hint').textContent=t.suggest_hint(v,w,s,d);
@@ -707,12 +737,26 @@ function renderDistribution(){
   document.getElementById('card-emoji').textContent=ROLE_EMOJIS[rk];
   document.getElementById('card-role-name').textContent=t.role_names[rk];
   document.getElementById('card-role-desc').textContent=t.role_card_desc[rk];
+  
+  const backImg = document.getElementById('card-back-img');
+  backImg.style.display = 'block';
+  document.getElementById('back-fallback').style.display = 'none';
+  
+  const rkCapitalized = rk.charAt(0).toUpperCase() + rk.slice(1);
+  backImg.src = `Card/${rkCapitalized}.png`;
+
   const ci=document.getElementById('card-inner');
   ci.style.transition='none';ci.classList.remove('flipped');
   void ci.offsetWidth;ci.style.transition='';
   isFlipped=false;
   document.getElementById('card-scene').style.cursor='pointer';
   document.getElementById('btn-next').style.display='none';
+  
+  const roleInfo = document.getElementById('revealed-role-info');
+  roleInfo.style.opacity = '0';
+  roleInfo.style.visibility = 'hidden';
+  document.getElementById('revealed-role-name').textContent = t.role_names[rk];
+  document.getElementById('revealed-role-desc').textContent = t.role_card_desc[rk];
 }
 function flipCard(){
   if(isFlipped)return;isFlipped=true;
@@ -723,149 +767,135 @@ function flipCard(){
     const t=i18n[lang],btn=document.getElementById('btn-next');
     btn.innerHTML=currentPlayer<roles.length-1?t.btn_next:t.btn_finish;
     btn.style.display='block';
+    
+    const roleInfo = document.getElementById('revealed-role-info');
+    roleInfo.style.visibility = 'visible';
+    roleInfo.style.opacity = '1';
   },560);
 }
 function nextPlayer(){
   currentPlayer++;playClick();
   if(currentPlayer>=roles.length){
-    refreshRoundLabels();
-    showScreen('screen-bridge');
+    initDashboard();
+    showScreen('screen-dashboard');
     setTimeout(playChime,300);
   } else renderDistribution();
 }
 
 /* ══════════════════════════════════════
-   NIGHT TIMER
+   DASHBOARD
 ══════════════════════════════════════ */
-function startNight(){
-  playClick();
-  timerLeft=NIGHT_DURATION;
-  timerPaused=false;
-  timerDone=false;
-  refreshRoundLabels();
-  setNightMode(true);
-  showScreen('screen-timer');
-  resetRingUI();
-  document.getElementById('btn-pause').textContent='⏸';
-  document.getElementById('btn-pause').title='Pause';
-  document.getElementById('timer-dot').classList.remove('paused');
-  document.getElementById('btn-skip').textContent=i18n[lang].btn_skip;
-  document.getElementById('btn-skip').disabled=false;
-  clearInterval(timerInterval);
-  timerInterval=setInterval(timerTick,1000);
+let dashTimerLeft = 60;
+let dashTimerInterval = null;
+let dashTimerPaused = true;
+const DASH_DEFAULT_TIME = 60;
+let playerStatus = [];
+
+function initDashboard(){
+  dashTimerLeft = DASH_DEFAULT_TIME;
+  dashTimerPaused = true;
+  clearInterval(dashTimerInterval);
+  updateDashTimerUI();
+  document.getElementById('dash-btn-play').textContent = '▶ Start';
+  
+  const list = document.getElementById('player-list');
+  list.innerHTML = '';
+  playerStatus = roles.map(r => ({role: r, dead: false}));
+  
+  playerStatus.forEach((p, i) => {
+    const t = i18n[lang];
+    const item = document.createElement('div');
+    item.className = 'player-item';
+    item.id = 'player-item-' + i;
+    
+    item.innerHTML = `
+      <div class="player-info">
+        <div class="player-emoji">${ROLE_EMOJIS[p.role]}</div>
+        <div class="player-details">
+          <div class="player-name-dash">${t.player_label} ${i+1}</div>
+          <div class="player-role-dash">${t.role_names[p.role]}</div>
+        </div>
+      </div>
+      <button class="btn-kill" onclick="togglePlayerStatus(${i})">Kill</button>
+    `;
+    list.appendChild(item);
+  });
 }
 
-function timerTick(){
-  if(timerPaused)return;
-  timerLeft--;
-  updateTimerUI();
-  // Sound
-  if(timerLeft<=10 && timerLeft>0) playUrgentTick();
-  else if(timerLeft>10) playTick();
-  if(timerLeft<=0) timerEnd();
-}
-
-function timerEnd(){
-  clearInterval(timerInterval);
-  timerDone=true;
-  playAlarm();
-  // Show digits as done
-  const digits=document.getElementById('timer-digits');
-  digits.textContent='0:00';
-  digits.classList.remove('urgent');
-  digits.classList.add('finished');
-  document.getElementById('timer-ring').classList.remove('urgent');
-  document.getElementById('timer-ring').style.strokeDashoffset=RING_CIRCUMFERENCE;
-  document.getElementById('timer-dot').classList.add('paused');
-  // Change skip to "Day Phase →"
-  const t=i18n[lang];
-  const skipBtn=document.getElementById('btn-skip');
-  skipBtn.textContent=t.timer_done+' → Day Phase';
-  skipBtn.onclick=goToDay;
-  document.getElementById('btn-pause').disabled=true;
-}
-
-function skipTimer(){
-  if(timerDone)return;
-  clearInterval(timerInterval);
-  playClick();
-  goToDay();
-}
-
-function togglePause(){
-  if(timerDone)return;
-  timerPaused=!timerPaused;
-  const pauseBtn=document.getElementById('btn-pause');
-  const dot=document.getElementById('timer-dot');
-  if(timerPaused){
-    pauseBtn.textContent='▶';
-    pauseBtn.title='Resume';
-    dot.classList.add('paused');
-    playClick();
+function togglePlayerStatus(idx){
+  playerStatus[idx].dead = !playerStatus[idx].dead;
+  const item = document.getElementById('player-item-' + idx);
+  const btn = item.querySelector('.btn-kill');
+  if(playerStatus[idx].dead){
+    item.classList.add('dead');
+    btn.textContent = 'Revive';
   } else {
-    pauseBtn.textContent='⏸';
-    pauseBtn.title='Pause';
-    dot.classList.remove('paused');
-    playClick();
+    item.classList.remove('dead');
+    btn.textContent = 'Kill';
+  }
+  playClick();
+}
+
+function toggleDashTimer(){
+  dashTimerPaused = !dashTimerPaused;
+  const btn = document.getElementById('dash-btn-play');
+  if(dashTimerPaused){
+    btn.textContent = '▶ Start';
+    clearInterval(dashTimerInterval);
+  } else {
+    btn.textContent = '⏸ Pause';
+    dashTimerInterval = setInterval(dashTimerTick, 1000);
+  }
+  playClick();
+}
+
+function dashTimerTick(){
+  if(dashTimerLeft > 0) {
+    dashTimerLeft--;
+    updateDashTimerUI();
+    if(dashTimerLeft <= 10 && dashTimerLeft > 0) playUrgentTick();
+    else if(dashTimerLeft > 10) playTick();
+    
+    if(dashTimerLeft === 0){
+      clearInterval(dashTimerInterval);
+      dashTimerPaused = true;
+      document.getElementById('dash-btn-play').textContent = '▶ Start';
+      playAlarm();
+    }
   }
 }
 
-function updateTimerUI(){
-  const mins=Math.floor(timerLeft/60);
-  const secs=timerLeft%60;
-  const str=`${mins}:${secs.toString().padStart(2,'0')}`;
-  const digits=document.getElementById('timer-digits');
-  const ring=document.getElementById('timer-ring');
-  digits.textContent=str;
-  // Urgency at ≤10 sec
-  if(timerLeft<=10){
-    digits.classList.add('urgent');ring.classList.add('urgent');
+function addDashTime(secs){
+  dashTimerLeft += secs;
+  updateDashTimerUI();
+  playClick();
+}
+
+function resetDashTimer(){
+  dashTimerLeft = DASH_DEFAULT_TIME;
+  dashTimerPaused = true;
+  clearInterval(dashTimerInterval);
+  document.getElementById('dash-btn-play').textContent = '▶ Start';
+  updateDashTimerUI();
+  playClick();
+}
+
+function updateDashTimerUI(){
+  const mins = Math.floor(dashTimerLeft / 60);
+  const secs = dashTimerLeft % 60;
+  const str = `${mins}:${secs.toString().padStart(2,'0')}`;
+  const digits = document.getElementById('dash-timer-digits');
+  digits.textContent = str;
+  if(dashTimerLeft <= 10 && dashTimerLeft > 0){
+    digits.classList.add('urgent');
   } else {
-    digits.classList.remove('urgent');ring.classList.remove('urgent');
+    digits.classList.remove('urgent');
   }
-  // Ring progress: offset goes from 0 (full) → CIRCUMFERENCE (empty)
-  const progress=timerLeft/NIGHT_DURATION;
-  ring.style.strokeDashoffset=RING_CIRCUMFERENCE*(1-progress);
-}
-
-function resetRingUI(){
-  const digits=document.getElementById('timer-digits');
-  const ring=document.getElementById('timer-ring');
-  digits.textContent='2:00';
-  digits.classList.remove('urgent','finished');
-  ring.classList.remove('urgent');
-  ring.style.strokeDashoffset='0';
-}
-
-function goToDay(){
-  clearInterval(timerInterval);
-  setNightMode(false);
-  refreshRoundLabels();
-  showScreen('screen-day');
-  setTimeout(playChime,200);
-}
-
-function setNightMode(on){
-  document.body.classList.toggle('night-mode',on);
-}
-
-/* ══════════════════════════════════════
-   DAY PHASE
-══════════════════════════════════════ */
-// startNight() is reused from day screen — it reads nightRound and increments
-// We need to increment before starting
-const _origStartNight=startNight;
-// Override btn-next-night to increment first
-function nextNight(){
-  nightRound++;
-  refreshRoundLabels();
-  startNight();
 }
 
 function endGame(){
   playClick();
-  clearInterval(timerInterval);
-  setNightMode(false);
+  clearInterval(dashTimerInterval);
   showScreen('screen-end');
 }
 
@@ -873,11 +903,10 @@ function endGame(){
    RESTART
 ══════════════════════════════════════ */
 function restartGame(){
-  clearInterval(timerInterval);
-  setNightMode(false);
-  timerLeft=NIGHT_DURATION;timerPaused=false;timerDone=false;nightRound=1;
-  counts.villager=4;counts.werewolf=2;counts.seer=1;counts.doctor=1;
-  ['villager','werewolf','seer','doctor'].forEach(r=>
+  clearInterval(dashTimerInterval);
+  dashTimerLeft=DASH_DEFAULT_TIME;dashTimerPaused=true;
+  counts.villager=4;counts.werewolf=2;counts.seer=1;counts.doctor=1;counts.king=0;counts.joker=0;
+  ['villager','werewolf','seer','doctor','king','joker'].forEach(r=>
     document.getElementById('count-'+r).textContent=counts[r]);
   document.getElementById('player-count-input').value='';
   document.getElementById('suggest-hint').textContent='';
@@ -894,9 +923,6 @@ function showScreen(id){
 /* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
-// Wire day screen "next night" button to increment round
-document.getElementById('btn-next-night').onclick=nextNight;
-
 setTimeout(()=>{const s=document.getElementById('splash');if(s)s.style.display='none'},3300);
 applyLang();
 </script>
